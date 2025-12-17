@@ -1,0 +1,18 @@
+    */
+    class Solution {
+        public boolean dfs(TreeNode root,long x,long y)
+        {
+            if(root==null)
+                return true;
+            if(!(root.val>x && root.val<y))
+                return false;
+            return dfs(root.left,x,root.val) && dfs(root.right,root.val,y);
+            
+        }
+        public boolean isValidBST(TreeNode root) {
+            return dfs(root,Long.MIN_VALUE,Long.MAX_VALUE);
+
+
+            
+        }
+    }
