@@ -1,0 +1,51 @@
+
+class Solution {
+    public void inorder(Node root,ArrayList<Integer> arr)
+    {
+        if(root!=null)
+        {
+            inorder(root.left,arr);
+            arr.add(root.data);
+            inorder(root.right,arr);
+        }
+        
+    }
+    
+    public ArrayList<Integer> merge(Node root1, Node root2) {
+        ArrayList<Integer> arr1 = new ArrayList<>();
+        ArrayList<Integer> arr2 = new ArrayList<>();
+        inorder(root1,arr1);
+        inorder(root2,arr2);
+        
+        ArrayList<Integer> mer = new ArrayList<>();
+        int i=0,j=0;
+        while(arr1.size()>i && j<arr2.size())
+        {
+            if(arr1.get(i)<=arr2.get(j))
+            {
+                mer.add(arr1.get(i));
+                i++;
+            }
+            else
+            {
+                mer.add(arr2.get(j));
+                j++;
+            }
+            
+        }
+        while(i<arr1.size())
+        {
+            mer.add(arr1.get(i));
+            i++;
+        }
+        while(j<arr2.size())
+        {
+            mer.add(arr2.get(j));
+            j++;
+        }
+        return mer;
+            // code here
+        
+        
+    }
+}
