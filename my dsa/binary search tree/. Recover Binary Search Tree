@@ -1,0 +1,40 @@
+class Solution {
+    TreeNode prev = null;
+    TreeNode first = null,mid = null,l = null;
+    public void inorder(TreeNode root)
+    {
+        if(root!=null)
+        {
+            inorder(root.left);
+            if(prev!=null && (root.val<prev.val)){
+                if(first==null){
+                    first=prev;
+                    mid = root;
+                }
+                else
+                    l = root;
+            }
+            prev = root;
+            inorder(root.right);
+        }
+
+    }
+    public void swap(TreeNode first,TreeNode l)
+    {
+        int v = first.val;
+        first.val = l.val;
+        l.val = v;
+    }
+    public void recoverTree(TreeNode root) {
+        inorder(root);
+        if(first!=null && l!=null)
+        {
+            swap(first,l);
+
+        }
+        else if(first!=null && mid!=null)
+        {
+            swap(first,mid);
+        }
+    }
+}

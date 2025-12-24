@@ -1,0 +1,41 @@
+class Solution {
+    public void bfs(ArrayList<ArrayList<Integer>> adj,int[] ind, ArrayList<Integer>  r)
+    {
+        Queue<Integer> q = new LinkedList<>();
+        for(int i=0;i<ind.length;i++)
+        {
+            if(ind[i]==0)
+                q.add(i);
+        }
+        while(!q.isEmpty())
+        {
+            int x = q.poll();
+            r.add(x);
+            for(int n: adj.get(x))
+            {
+                ind[n]--;
+                if(ind[n]==0)
+                    q.add(n);
+                
+            }
+        }
+        
+    }
+    public ArrayList<Integer> topoSort(int V, int[][] edges) {
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<V;i++)
+            adj.add(new ArrayList<>());
+        int [] ind = new int[V];
+        for(int i=0;i<edges.length;i++)
+        {
+            adj.get(edges[i][0]).add(edges[i][1]);
+            ind[edges[i][1]]++;
+            
+        }
+        ArrayList<Integer> r = new ArrayList<>(V);
+        bfs(adj,ind,r);
+        return r;
+        
+        
+    }
+}
